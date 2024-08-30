@@ -20,7 +20,7 @@ function handleFileUpload($existing_file_path) {
                 $new_file_path = $upload_dir . $file_name;
 
                 if (!is_dir($upload_dir)) {
-                    mkdir($upload_dir, 0777, true);
+                    mkdir($upload_dir, 0755, true);
                 }
 
                 if (move_uploaded_file($_FILES['file']['tmp_name'], $new_file_path)) {
