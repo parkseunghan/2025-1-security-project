@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>회원가입</title>
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+        <h1><a href="index.html">게시판 홈</a></h1>
+        <h1>회원가입</h1>
+        <form action="userin.php" method="post">
+            <label>ID</label><br>
+            <input type="text" id="id" name="id" placeholder="아이디" required> <br>
+            <label>Password</label><br>
+            <input type="password" id="password" name="password" placeholder="비밀번호" required>
+            <br><label>Password confirm</label><br>
+            <input type="password" id="password_2" name="password_2" placeholder="비밀번호 확인" required>
+            <button type="submit" name="user_in">회원가입</button>
+
+        </form>
+    </body>
+</html>

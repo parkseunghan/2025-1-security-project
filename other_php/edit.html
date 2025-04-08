@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>게시글 수정</title>
+    </head>
+
+    <body>
+        <h1><a href="index.html">게시판 홈</a></h1>
+        <h1>글 수정하기</h1>
+
+        <form id="edit" action="edit.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="post_id" name="post_id">
+            <br><label>제목</label><br>
+            <input type="text" id="title" name="title" required>
+            <br><label>본문</label><br>
+            <textarea id="content" name="content" rows="10" required></textarea>
+            <br><label>파일 첨부</label><br>
+            <input type="file" id="file" name="file">
+            <button type="submit">수정하기</button>
+            <br><div id="show"></div>
+
+        </form>
+
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            document.addEventListener("DOMContentLoaded", function(){
+                fetch(`postone.php?id=${postId}`)
+                    .then(response => response.json())
+                    .then(post =>{
+                        document.getElementById('post_id').value = postId;
+                        document.getElementById('title').value = post.title;
+                        document.getElementById('content').value = post.content;
+                        document.getElementById('file').value = post.file;
+
+                        if(post.file_path){
+                            const filename = post.file_path.split('/').pop();
+                            document.getElementById('show').innerHTML =`
+                            <p>현재 첨부파일: ${fileName} <a href="${post.file_path}" download>다운로드</a></p>
+                            <p>*수정할 게시물에 있을 파일을 선택*</p>
+                            `;
+                        }else{
+                            document.getElementById('show').innerHTML = '<p>첨부파일 없음</p>';
+                        }
+
+                    });
+            });
+        </script>
+    </body>
+</html>

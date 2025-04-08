@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>게시판</title>
+        <style>
+            body {
+                text-align: right;
+            }
+            button {
+                padding: 5px 10px;
+                margin: 5px;
+                font-size: 16px;
+            }
+            input[type="text"]{
+                font-size: 16px;
+                width: 200px;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <h1><a href="index.html">게시판 홈</a></h1>
+        <div id="user_button">
+
+        </div>
+    
+        <form action="create.html">
+            <button type="submit">글쓰기</button>
+        </form>
+        <hr>
+        <form id="search_form">
+            <input type="text" name="query" placeholder="검색어를 입력하세요">
+            <input type="submit" value="검색">
+        </form>
+
+        <ul id="posts_list">
+
+        </ul>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+                fetch('check_login.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const user_button = document.getElementById('user_button');
+                        if(data.loggedIn){
+                            user_button.innerHTML = `
+                                <div>안녕하세요 ${data.username}님</div>
+                                <form action="logout.php" method="post">
+                                    <button type="submit">로그아웃</button>
+                                </form>
+                            `;
+                        }else{
+                            user_button.innerHTML = `
+                                <form action="login.html">
+                                    <button type="submit">로그인</button>
+                                </form>
+                            `;
+                        }
+                    })
+                
+                fetch('posts.php')
+                    .then(response => response.json())
+                    .then(posts =>{
+                        const postlist =  document.getElementById('posts_list');
+                        posts.forEach(post =>{
+                            const list_get = document.createElement('li');
+                            list_get.innerHTML =`
+                                <span><a href="postone.php?id=${post.id}">${post.title}</a></span>
+                                <span>작성자 : ${post.username}</span>
+                                <span>${post.date}</span>
+                                
+                            `;
+                            postlist.appendChild(list_get);
+                            
+                        });
+                    })
+                //검색기능
+                const search = document.getElementById('search_form');
+                search.addEventListener('submit', function(event){
+                    event.preventDefault();
+
+                    const formdata = new FormData(search);
+                    fetch('search.php',{
+                        method: 'POST',
+                        body: formdata
+                    })
+                    .then(response => response.json())
+                    .then(posts =>{
+                        const postlist = document.getElementById('posts_list');
+                        postlist.innerHTML = '';
+                        if(posts.length == 0){
+                            postlist.innerHTML = '<li>검색결과 없음</li>';
+                        }else{
+                            posts.forEach(post =>{
+                                const list_get = document.createElement('li');
+                                list_get.innerHTML = `
+                                    <span><a href="postone.html?id=${post.id}">${post.title}</a></span>
+                                    <span>작성자 : ${post.username}</span>
+                                    <span>${post.date}</span>
+                                `;
+                                postlist.appendChild(list_get);
+                            })
+                        }
+                    })
+                })
+
+            });
+        </script>
+
+ 
+    </body>
+</html>
