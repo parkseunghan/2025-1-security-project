@@ -17,6 +17,7 @@
 
 ## 폴더 구조
 
+```sh
 📁 /var/www/html/2025-1-security-project/
 │
 ├── 📁 public/                     # 외부 진입점, static 파일 포함
@@ -58,7 +59,7 @@
 ├── .htaccess                     # 보안 설정 + URL 재작성
 ├── composer.json                # 외부 라이브러리 정의
 └── README.md
-
+```
 
 ## 기능별 매핑표 (취약점 제거 버전)
 
