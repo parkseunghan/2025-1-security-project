@@ -83,3 +83,34 @@ http://localhost:8080
 - 각 기능 별 **취약점 존재**
 
 ---
+
+
+## 확장
+| 기능                  | 설명                                | 취약점 존재 여부       |
+| ------------------- | --------------------------------- | --------------- |
+| 1. 마이페이지 (회원 정보 수정) | 사용자는 로그인 후 자신의 닉네임, 비밀번호 등을 수정 가능 | ✅ XSS, 인증 우회    |
+| 2. 회원가입 개선          | 아이디 중복 확인, 닉네임 중복 확인, 비밀번호 재입력 비교 | ✅ JS 조작으로 우회 가능 |
+| 3. 관리자 페이지          | 관리자 계정은 모든 사용자 정보 및 글 확인/삭제 가능    | ✅ 관리자 권한 탈취 가능  |
+| 4. Seed 관리자 계정      | `seed.php` 또는 SQL에 직접 삽입          | ✅ 노출되면 관리자 탈취됨  |
+
+### 🧩 앞으로 작성해야 할 파일들
+📁 public/
+mypage.php: 회원정보 수정 폼 (닉네임, 비밀번호)
+
+admin.php: 관리자 전용 페이지
+
+check_username.php: 아이디 중복 체크용 AJAX 응답
+
+check_nickname.php: 닉네임 중복 체크용 AJAX 응답
+
+📁 controllers/
+UserController.php: 마이페이지, 관리자 페이지 처리 추가
+
+📁 models/
+User.php: updateUser(), isUsernameTaken(), isNicknameTaken() 등 함수 추가
+
+📁 views/
+auth/mypage.php, admin/dashboard.php 등 추가 가능
+
+📁 _docker/mysql/
+init.sql: 관리자 계정 seed 삽입

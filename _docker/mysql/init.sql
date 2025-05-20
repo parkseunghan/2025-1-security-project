@@ -19,3 +19,6 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 );
+
+INSERT INTO users (username, nickname, password)
+VALUES ('admin', '관리자', 'admin'); -- 해시 없이 저장 (vuln0)

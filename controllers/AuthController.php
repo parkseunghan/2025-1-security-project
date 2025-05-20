@@ -47,6 +47,16 @@ class AuthController {
                         setcookie('remember_me', $user['id'], time() + (86400 * 7), "/");
                     }
 
+                    $log = sprintf(
+                        "[%s] LOGIN: user_id=%s | user_name=%s | IP=%s | UA=%s\n",
+                        date("Y-m-d H:i:s"),
+                        $user['id'],
+                        $user['username'],
+                        $_SERVER['REMOTE_ADDR'],
+                        $_SERVER['HTTP_USER_AGENT']
+                    );
+                    file_put_contents(__DIR__ . '/../logs/login.log', $log, FILE_APPEND);
+
                     echo "<script>alert('로그인 성공!'); location.href='index.php';</script>";
                     exit;
                 } else {

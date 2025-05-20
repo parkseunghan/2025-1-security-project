@@ -1,0 +1,63 @@
+<?php
+require_once '../config/config.php';
+
+if (!isset($_SESSION['id'])) {
+    echo "<script>alert('로그인이 필요합니다.'); location.href='login.php';</script>";
+    exit;
+}
+
+$id = $_SESSION['id'];
+$query = "SELECT * FROM users WHERE id = $id";
+$result = $mysqli->query($query);
+$user = $result->fetch_assoc();
+
+$errors = [];
+$success = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nickname = $_POST['nickname'];
+    $password = $_POST['password'];
+
+    if (empty($nickname) || empty($password)) {
+        $errors[] = "닉네임과 비밀번호를 모두 입력해주세요.";
+    } else {
+        $update = "UPDATE users SET nickname = '$nickname', password = '$password' WHERE id = $id";
+        if ($mysqli->query($update)) {
+            $_SESSION['nickname'] = $nickname;
+            $success = true;
+        } else {
+            $errors[] = "업데이트 실패: " . $mysqli->error;
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+</head>
+<body>
+    <h1>마이페이지</h1>
+    <p>아이디: <?php echo htmlspecialchars($user['username']); ?></p>
+
+    <?php if ($success): ?>
+        <p style="color: green;">정보가 성공적으로 변경되었습니다.</p>
+    <?php endif; ?>
+
+    <?php if (!empty($errors)): ?>
+        <ul style="color: red;">
+            <?php foreach ($errors as $e) echo "<li>$e</li>"; ?>
+        </ul>
+    <?php endif; ?>
+
+    <form method="POST" action="">
+        <label>닉네임: <input type="text" name="nickname" value="<?php echo htmlspecialchars($user['nickname']); ?>"></label><br>
+        <label>비밀번호: <input type="text" name="password" value="<?php echo $user['password']; ?>"></label><br>
+        <button type="submit">정보 수정</button>
+    </form>
+
+    <p><a href="index.php">메인으로</a></p>
+</body>
+</html>

@@ -1,0 +1,2 @@
+[2025-05-20 05:54:19] LOGIN: user_id=1 | IP=172.19.0.1 | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+[2025-05-20 05:56:29] LOGIN: user_id=1 | user_name=test1 | IP=172.19.0.1 | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
