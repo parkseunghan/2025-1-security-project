@@ -22,7 +22,17 @@ docker compose up --build
 # 2. 웹 브라우저 접속
 http://localhost:8080
 
+
+# 3. 내리기
+docker compose down -v
 ```
+
+### logs 저장 안되면
+```sh
+mkdir -p logs
+chmod 777 logs
+```
+
 ---
 
 ## 보고서 (예시)

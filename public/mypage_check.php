@@ -2,17 +2,23 @@
 require_once '../config/config.php';
 require_once '../controllers/AuthController.php';
 
-$errors = AuthController::register();
+session_start();
+if (!isset($_SESSION['id'])) {
+    echo "<script>alert('로그인이 필요합니다.'); location.href='login.php';</script>";
+    exit;
+}
+
+$errors = AuthController::checkPasswordAndRedirect();
 ?>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>회원가입</title>
+    <title>비밀번호 확인</title>
 </head>
 <body>
-    <h1>회원가입</h1>
+    <h1>비밀번호 확인</h1>
 
     <?php if (!empty($errors)): ?>
         <ul style="color: red;">
@@ -23,13 +29,9 @@ $errors = AuthController::register();
     <?php endif; ?>
 
     <form method="POST">
-        <label>아이디: <input type="text" name="username" required></label><br>
-        <label>닉네임: <input type="text" name="nickname" required></label><br>
         <label>비밀번호: <input type="password" name="password" required></label><br>
-        <label>비밀번호 확인: <input type="password" name="password2" required></label><br>
-        <button type="submit">회원가입</button>
+        <button type="submit">확인</button>
     </form>
-
-    <a href="login.php">로그인</a>
+    <a href="index.php">홈으로</a>
 </body>
 </html>

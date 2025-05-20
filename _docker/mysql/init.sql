@@ -14,11 +14,13 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `nickname` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `is_admin` TINYINT(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 );
 
-INSERT INTO users (username, nickname, password)
-VALUES ('admin', '관리자', 'admin'); -- 해시 없이 저장 (vuln0)
+INSERT INTO users (username, nickname, password, is_admin)
+VALUES ('admin', 'admin', '1234', 1);
+
