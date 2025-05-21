@@ -15,8 +15,8 @@ $result = Post::getAllPosts($search);
     <?php if (isset($_SESSION['id'])): ?>
         <p><?= $_SESSION['nickname'] ?>님 환영합니다!</p>
         <a href="write.php">글쓰기</a> |
-        <a href="mypage.php">마이페이지</a> | <!-- ✅ 추가된 부분 -->
-        <a href="logout.php">로그아웃</a>
+        <a href="mypage.php">마이페이지</a> |
+        <a href="logout.php">로그아웃</a> |
         <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
             <a href="admin.php">관리자</a>
         <?php endif; ?>
