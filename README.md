@@ -66,7 +66,10 @@ chmod 777 logs
 │   └── VULNERABILITY_LIST.md
 │
 ├── 📁 public/
-│   ├── delete.php
+│   ├── admin/
+│   │   ├── delete.php
+│   │   └── index.php
+│   ├── admin.php
 │   ├── download.php
 │   ├── edit.php
 │   ├── index.php
@@ -90,6 +93,7 @@ chmod 777 logs
 - 게시글 작성 / 수정 / 삭제
 - 파일 업로드 및 다운로드
 - 게시글 검색 기능
+- 관리자 페이지
 - 각 기능 별 **취약점 존재**
 
 ---
