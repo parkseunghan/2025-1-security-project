@@ -43,6 +43,18 @@ ls -la /var/www/html/public
 cat /var/log/apache2/error.log
 ```
 
+## ssh 접속
+
+```sh
+# 같은 네트워크
+
+ipconfig
+
+ssh hacker@<ipv4> -p 2222
+yes
+hacker123
+```
+
 ```sh
 # 태그 강제 반영
 git tag -f <tag_name>
@@ -73,34 +85,35 @@ chmod 777 logs
 ```sh
 2025-1-security-project/
 │
-├── 📁 config/
-│   └── config.php
+├── 📁 web/
+│   ├── 📁 config/
+│   │   └── config.php
 │
-├── 📁 controllers/
-│   ├── AuthController.php
-│   ├── PostController.php
-│   └── VULNERABILITY_LIST.md
+│   ├── 📁 app/
+│   │   ├── 📁 controllers/
+│   │   │   ├── AuthController.php
+│   │   │   ├── PostController.php
+│   │   │   └── VULNERABILITY_LIST.md
+│   │   └── 📁 models/
+│   │   │   ├── DB.php
+│   │   │   ├── Post.php
+│   │   │   ├── User.php
+│   │   │   └── VULNERABILITY_LIST.md
 │
-├── 📁 models/
-│   ├── DB.php
-│   ├── Post.php
-│   ├── User.php
-│   └── VULNERABILITY_LIST.md
-│
-├── 📁 public/
-│   ├── admin/
-│   │   ├── delete.php
-│   │   └── index.php
-│   ├── admin.php
-│   ├── download.php
-│   ├── edit.php
-│   ├── index.php
-│   ├── login.php
-│   ├── logout.php
-│   ├── register.php
-│   ├── view.php
-│   ├── write.php
-│   └── VULNERABILITY_LIST.md
+│   └── 📁 public/
+│   │   ├── admin/
+│   │   │   ├── delete.php
+│   │   │   └── index.php
+│   │   ├── admin.php
+│   │   ├── download.php
+│   │   ├── edit.php
+│   │   ├── index.php
+│   │   ├── login.php
+│   │   ├── logout.php
+│   │   ├── register.php
+│   │   ├── view.php
+│   │   ├── write.php
+│   │   └── VULNERABILITY_LIST.md
 │
 ├── .gitignore
 ├── db_table.sql
