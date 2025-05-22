@@ -16,15 +16,26 @@
 ## ⚙️ 실행 방법 (Docker 기반)
 
 ```bash
-# 1. 빌드 및 실행
+# 0. 빌드 및 실행 (최초 1회 or 코드 변경 시)
 docker compose up --build
+
+# 1. 실행
+docker compose up
 
 # 2. 웹 브라우저 접속
 http://localhost:8080
 
-
-# 3. 내리기
+# 3. 종료
 docker compose down -v
+
+# 4. 캐시 제거 후 빌드
+docker compose build --no-cache
+```
+
+```sh
+# 태그 강제 반영
+git tag -f <tag_name>
+git push origin <tag_name> --force
 ```
 
 ### logs 저장 안되면

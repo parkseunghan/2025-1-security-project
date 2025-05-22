@@ -14,5 +14,3 @@ COPY .docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # PHP 업로드 관련 설정 (.ini)
 COPY .docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
-
-CMD echo "✅ 서버가 실행되었습니다! 접속 주소: http://localhost:8080" && apache2ctl -D FOREGROUND
