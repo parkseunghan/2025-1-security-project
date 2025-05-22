@@ -33,6 +33,17 @@ docker compose build --no-cache
 ```
 
 ```sh
+# 5. bash 실행
+docker exec -it php-web bash
+
+# 6. 파일 권한 확인
+ls -la /var/www/html/public
+
+# 7. Apache 에러 로그 확인
+cat /var/log/apache2/error.log
+```
+
+```sh
 # 태그 강제 반영
 git tag -f <tag_name>
 git push origin <tag_name> --force
