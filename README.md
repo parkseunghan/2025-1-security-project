@@ -91,6 +91,7 @@ chmod 777 logs
 │
 │   ├── 📁 app/
 │   │   ├── 📁 controllers/
+│   │   │   ├── AdminController.php
 │   │   │   ├── AuthController.php
 │   │   │   ├── PostController.php
 │   │   │   └── VULNERABILITY_LIST.md
@@ -101,11 +102,13 @@ chmod 777 logs
 │   │   │   └── VULNERABILITY_LIST.md
 │
 │   └── 📁 public/
+│   │   ├── uploads/
 │   │   ├── admin/
 │   │   │   ├── delete.php
 │   │   │   └── index.php
 │   │   ├── admin.php
 │   │   ├── download.php
+│   │   ├── delete.php
 │   │   ├── edit.php
 │   │   ├── index.php
 │   │   ├── login.php
@@ -113,10 +116,25 @@ chmod 777 logs
 │   │   ├── register.php
 │   │   ├── view.php
 │   │   ├── write.php
+│   │   ├── mypage.php
+│   │   ├── mypage_check.php
+│   │   ├── mypage_update.php
 │   │   └── VULNERABILITY_LIST.md
+│
+├── .docker/
+│   └── apache/
+│   │   └── vhost.conf
+│   └── php/
+│       └── uploads.ini 
+│
+├── _docker/
+│   ├── mysql/
+│   │   └── init.sql
 │
 ├── .gitignore
 ├── db_table.sql
+├── docker-compose.yml
+├── Dockerfile
 └── README.md
 
 ```
