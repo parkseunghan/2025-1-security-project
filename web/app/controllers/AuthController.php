@@ -22,13 +22,19 @@ class AuthController {
 
             $conn = DB::connect();
 
-            $userRes = $conn->query("SELECT id FROM users WHERE username = '$username'");
-            $nickRes = $conn->query("SELECT id FROM users WHERE nickname = '$nickname'");
-
-            if ($userRes && $userRes->num_rows > 0) {
+            // ID 중복 검사
+            $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            if ($stmt->get_result()->num_rows > 0) {
                 $errors[] = "이미 존재하는 아이디입니다.";
             }
-            if ($nickRes && $nickRes->num_rows > 0) {
+
+            // 닉네임 중복 검사
+            $stmt = $conn->prepare("SELECT id FROM users WHERE nickname = ?");
+            $stmt->bind_param("s", $nickname);
+            $stmt->execute();
+            if ($stmt->get_result()->num_rows > 0) {
                 $errors[] = "이미 존재하는 닉네임입니다.";
             }
 
