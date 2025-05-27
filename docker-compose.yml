@@ -20,9 +20,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: vuln0
-      MYSQL_USER: vuln0
-      MYSQL_PASSWORD: vuln0
+      MYSQL_DATABASE: vuln1
+      MYSQL_USER: vuln1
+      MYSQL_PASSWORD: vuln1
     ports:
       - "3306:3306"
     volumes:
