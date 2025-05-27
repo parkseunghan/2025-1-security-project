@@ -7,12 +7,12 @@ class AuthController {
         $errors = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username   = $_POST['username'];
-            $nickname   = $_POST['nickname'];
-            $password   = $_POST['password'];
-            $password2  = $_POST['password2'];
+            $username = trim($_POST['username']);
+            $nickname = trim($_POST['nickname']);
+            $password = $_POST['password'];
+            $password2 = $_POST['password2'];
 
-            if (empty($username) || empty($nickname) || empty($password) || empty($password2)) {
+            if (!$username || !$nickname || !$password || !$password2) {
                 $errors[] = "모든 항목을 입력해주세요.";
             }
 
