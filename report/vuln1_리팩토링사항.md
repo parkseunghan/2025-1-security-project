@@ -1,3 +1,6 @@
+### /config/config.php
+
+```php
 <?php
 // DB 설정
 define('DB_HOST', 'mysql-db');
@@ -13,3 +16,5 @@ ini_set('session.use_strict_mode', 1);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+```
