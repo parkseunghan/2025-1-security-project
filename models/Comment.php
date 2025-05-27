@@ -1,13 +1,14 @@
 <?php
 require_once 'DB.php';
 
-class Comment {
-    public static function createComment($content, $postId, $userId) {
+    class Comment {
+        public static function createComment($content, $postId, $userId, $parentId = null) {
         $conn = DB::connect();
-        $stmt = $conn->prepare("INSERT INTO comments (content, post_id, user_id) VALUES (?, ?, ?)");
-        $stmt->bind_param("sii", $content, $postId, $userId);
+        $stmt = $conn->prepare("INSERT INTO comments (content, post_id, user_id, parent_id) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("siii", $content, $postId, $userId, $parentId);
         return $stmt->execute();
     }
+
 
     public static function getCommentsByPostId($postId) {
         $conn = DB::connect();
