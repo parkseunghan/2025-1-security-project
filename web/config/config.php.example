@@ -1,0 +1,11 @@
+<?php
+// DB 설정만 정의
+define('DB_HOST', 'mysql-db');
+define('DB_USER', 'vuln0');
+define('DB_PASS', 'vuln0');
+define('DB_NAME', 'vuln0');
+
+// 세션 시작
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}

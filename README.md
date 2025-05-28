@@ -33,6 +33,29 @@ docker compose build --no-cache
 ```
 
 ```sh
+# 5. bash 실행
+docker exec -it php-web bash
+
+# 6. 파일 권한 확인
+ls -la /var/www/html/public
+
+# 7. Apache 에러 로그 확인
+cat /var/log/apache2/error.log
+```
+
+## ssh 접속
+
+```sh
+# 같은 네트워크
+
+ipconfig
+
+ssh hacker@<ipv4> -p 2222
+yes
+hacker123
+```
+
+```sh
 # 태그 강제 반영
 git tag -f <tag_name>
 git push origin <tag_name> --force
@@ -62,37 +85,56 @@ chmod 777 logs
 ```sh
 2025-1-security-project/
 │
-├── 📁 config/
-│   └── config.php
+├── 📁 web/
+│   ├── 📁 config/
+│   │   └── config.php
 │
-├── 📁 controllers/
-│   ├── AuthController.php
-│   ├── PostController.php
-│   └── VULNERABILITY_LIST.md
+│   ├── 📁 app/
+│   │   ├── 📁 controllers/
+│   │   │   ├── AdminController.php
+│   │   │   ├── AuthController.php
+│   │   │   ├── PostController.php
+│   │   │   └── VULNERABILITY_LIST.md
+│   │   └── 📁 models/
+│   │   │   ├── DB.php
+│   │   │   ├── Post.php
+│   │   │   ├── User.php
+│   │   │   └── VULNERABILITY_LIST.md
 │
-├── 📁 models/
-│   ├── DB.php
-│   ├── Post.php
-│   ├── User.php
-│   └── VULNERABILITY_LIST.md
-│
-├── 📁 public/
-│   ├── admin/
+│   └── 📁 public/
+│   │   ├── uploads/
+│   │   ├── admin/
+│   │   │   ├── delete.php
+│   │   │   └── index.php
+│   │   ├── admin.php
+│   │   ├── download.php
 │   │   ├── delete.php
-│   │   └── index.php
-│   ├── admin.php
-│   ├── download.php
-│   ├── edit.php
-│   ├── index.php
-│   ├── login.php
-│   ├── logout.php
-│   ├── register.php
-│   ├── view.php
-│   ├── write.php
-│   └── VULNERABILITY_LIST.md
+│   │   ├── edit.php
+│   │   ├── index.php
+│   │   ├── login.php
+│   │   ├── logout.php
+│   │   ├── register.php
+│   │   ├── view.php
+│   │   ├── write.php
+│   │   ├── mypage.php
+│   │   ├── mypage_check.php
+│   │   ├── mypage_update.php
+│   │   └── VULNERABILITY_LIST.md
+│
+├── .docker/
+│   └── apache/
+│   │   └── vhost.conf
+│   └── php/
+│       └── uploads.ini 
+│
+├── _docker/
+│   ├── mysql/
+│   │   └── init.sql
 │
 ├── .gitignore
 ├── db_table.sql
+├── docker-compose.yml
+├── Dockerfile
 └── README.md
 
 ```

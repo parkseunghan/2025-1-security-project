@@ -1,0 +1,3 @@
+[2025-05-21 00:59:10] LOGIN: user_id=4 | user_name=test1 | user_nickname=test1 | IP=172.18.0.1 | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+[2025-05-21 00:59:29] LOGIN: user_id=1 | user_name=admin | user_nickname=admin | IP=172.18.0.1 | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
+[2025-05-22 04:12:39] LOGIN: user_id=1 | user_name=admin | user_nickname=admin | IP=172.18.0.1 | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36
