@@ -9,6 +9,7 @@ services:
       - "2222:22"     # SSH용
     volumes:
       - ./web:/var/www/html                                # 실습 전용 영역만 마운트
+      - /var/www/html/public/uploads                       # 로컬 마운트 해제
     depends_on:
       - db
     networks:
