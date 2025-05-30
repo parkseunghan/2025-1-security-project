@@ -5,34 +5,35 @@ class PostController {
     // ✅ 글 작성
     public static function write() {
         $errors = [];
-
+    
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title = trim($_POST['title'] ?? '');
             $content = trim($_POST['content'] ?? '');
             $userId = $_SESSION['id'] ?? null;
             $filePath = '';
-
+    
             // ✅ 파일 업로드
             if (isset($_FILES['upload']) && $_FILES['upload']['error'] === UPLOAD_ERR_OK) {
                 $filename = basename($_FILES['upload']['name']);
                 $tmp = $_FILES['upload']['tmp_name'];
                 $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-
+    
                 // ✅ 파일 확장자 제한
                 $allowed = ['jpg', 'png', 'jpeg', 'gif', 'pdf'];
                 if (!in_array($ext, $allowed)) {
                     $errors[] = "허용되지 않는 파일 형식입니다.";
                 } else {
                     $newName = time() . '_' . preg_replace("/[^a-zA-Z0-9_.]/", "", $filename);
-                    $filePath = 'uploads/' . $newName;
-                    move_uploaded_file($tmp, '../' . $filePath);
+                    $filePath = 'public/uploads/' . $newName;
+                    $uploadPath = '/var/www/html/' . $filePath; // 실제 저장 경로
+                    move_uploaded_file($tmp, $uploadPath);
                 }
             }
-
+    
             if (!$title || !$content) {
                 $errors[] = "제목과 내용을 입력해주세요.";
             }
-
+    
             if (empty($errors)) {
                 $result = Post::createPost($title, $content, $filePath, $userId);
                 if ($result) {
@@ -43,9 +44,10 @@ class PostController {
                 }
             }
         }
-
+    
         return $errors;
     }
+    
 
     // ✅ 글 수정
     public static function update($id) {

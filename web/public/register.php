@@ -2,7 +2,10 @@
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../app/controllers/AuthController.php';
 
-$errors = AuthController::register();
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $errors = AuthController::register();
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +25,7 @@ $errors = AuthController::register();
         </ul>
     <?php endif; ?>
 
-    <form method="POST">
+    <form method="POST" autocomplete="off">
         <label>아이디: <input type="text" name="username" required></label><br>
         <label>닉네임: <input type="text" name="nickname" required></label><br>
         <label>비밀번호: <input type="password" name="password" required></label><br>
