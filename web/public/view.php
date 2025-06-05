@@ -8,16 +8,20 @@ if (!$post) {
     echo "<script>alert('존재하지 않는 글입니다'); location.href='index.php';</script>";
     exit;
 }
+$title = htmlspecialchars($post['title'], ENT_QUOTES, 'UTF-8');
+$nickname = htmlspecialchars($post['nickname'], ENT_QUOTES, 'UTF-8');
+$createdAt = htmlspecialchars($post['created_at'], ENT_QUOTES, 'UTF-8');
+$content = nl2br(htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8'));
 ?>
 
 <!DOCTYPE html>
 <html lang="ko">
-<head><meta charset="UTF-8"><title><?= $post['title'] ?></title></head>
+<head><meta charset="UTF-8"><title><?= $title ?></title></head>
 <body>
-    <h1><?= $post['title'] ?></h1>
-    <p>작성자: <?= $post['nickname'] ?> | 작성일: <?= $post['created_at'] ?></p>
+    <h1><?= $title ?></h1>
+    <p>작성자: <?= $nickname ?> | 작성일: <?= $createdAt ?></p>
     <hr>
-    <div><?= nl2br($post['content']) ?></div>
+    <div><?= $content ?></div>
     <hr>
 
     <?php if ($post['file_path']): ?>
