@@ -14,8 +14,12 @@ class PostController {
             if (isset($_FILES['upload']) && $_FILES['upload']['error'] === UPLOAD_ERR_OK) {
                 $filename = $_FILES['upload']['name'];
                 $tmp = $_FILES['upload']['tmp_name'];
-                $filePath = 'uploads/' . time() . '_' . $filename;
-                move_uploaded_file($tmp, '../' . $filePath);
+                
+                $newName = time() . '_' . $filename;
+		            $filePath = 'public/uploads/' . $newName;
+         
+			          $uploadPath = '/var/www/html/' . $filePath;
+	              move_uploaded_file($tmp, $uploadPath);
             }
 
             if (empty($title) || empty($content)) {
@@ -33,6 +37,7 @@ class PostController {
 
         return $errors;
     }
+
 
     public static function update($id) {
         $errors = [];

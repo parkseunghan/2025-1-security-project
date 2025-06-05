@@ -19,10 +19,7 @@ while ($row = $commentResult->fetch_assoc()) {
 
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title><?= $post['title'] ?></title>
-</head>
+<head><meta charset="UTF-8"><title><?= $post['title'] ?></title></head>
 <body>
     <h1><?= $post['title'] ?></h1>
     <p>작성자: <?= $post['nickname'] ?> | 작성일: <?= $post['created_at'] ?></p>
@@ -31,13 +28,14 @@ while ($row = $commentResult->fetch_assoc()) {
     <hr>
 
     <?php if ($post['file_path']): ?>
-        <p>첨부파일: <a href="download.php?file=<?= $post['file_path'] ?>">다운로드</a></p>
+        <p>첨부파일: <a href="download.php?file=<?= urlencode($post['file_path']) ?>">다운로드</a></p>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $post['user_id']): ?>
         <a href="edit.php?id=<?= $post['id'] ?>">수정</a>
         <a href="delete.php?id=<?= $post['id'] ?>">삭제</a>
     <?php endif; ?>
+    
     <hr>
 
     <h3>댓글</h3>

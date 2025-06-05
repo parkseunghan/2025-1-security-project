@@ -8,7 +8,8 @@ services:
       - "8080:80"     # 웹용
       - "2222:22"     # SSH용
     volumes:
-      - ./web:/var/www/html                                # 실습 전용 영역만 마운트
+      - ./web:/var/www/html                                # 실습 전용 영역만 마운트SS
+      - /var/www/html/public/uploads
     depends_on:
       - db
     networks:
