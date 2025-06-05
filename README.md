@@ -36,6 +36,9 @@ docker compose build --no-cache
 # 5. bash 실행
 docker exec -it php-web bash
 
+# 5-1. mysql 실행
+docker exec -it mysql-db mysql -u root -p
+
 # 6. 파일 권한 확인
 ls -la /var/www/html/public
 

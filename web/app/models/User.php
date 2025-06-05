@@ -31,7 +31,7 @@ class User {
     // ✅ 단일 유저 조회
     public static function getUserById($id) {
         $conn = DB::connect();
-        $stmt = $conn->prepare("SELECT id, username, nickname, is_admin FROM users WHERE id = ?");
+        $stmt = $conn->prepare("SELECT id, username, nickname, password, is_admin FROM users WHERE id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
@@ -74,4 +74,21 @@ class User {
         $user = self::getUserById($id);
         return $user && $user['is_admin'] == 1;
     }
+
+    // ✅ 닉네임 및 비밀번호 동시 수정 함수
+    public static function updateUser($id, $nickname, $password = '') {
+        $conn = DB::connect();
+
+        if ($password) {
+            $stmt = $conn->prepare("UPDATE users SET nickname = ?, password = ? WHERE id = ?");
+            $hashed = password_hash($password, PASSWORD_DEFAULT);
+            $stmt->bind_param("ssi", $nickname, $hashed, $id);
+        } else {
+            $stmt = $conn->prepare("UPDATE users SET nickname = ? WHERE id = ?");
+            $stmt->bind_param("si", $nickname, $id);
+        }
+
+        return $stmt->execute();
+    }
+
 }

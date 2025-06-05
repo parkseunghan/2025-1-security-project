@@ -119,44 +119,48 @@ class AuthController {
     }
 
     // ✅ 마이페이지 수정
-    public static function mypage() {
-        $errors = [];
+    public static function updateUser() {
+    $errors = [];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nickname = trim($_POST['nickname']);
-            $password = $_POST['password'] ?? '';
-            $password2 = $_POST['password2'] ?? '';
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $nickname = trim($_POST['nickname']);
+        $password = $_POST['password'] ?? '';
+        $password2 = $_POST['password2'] ?? '';
 
-            if (!$nickname) {
-                $errors[] = "닉네임을 입력해주세요.";
-            }
+        if (!$nickname) {
+            $errors[] = "닉네임을 입력해주세요.";
+        }
 
-            if ($password !== $password2) {
-                $errors[] = "비밀번호가 일치하지 않습니다.";
-            }
+        if ($password !== $password2) {
+            $errors[] = "비밀번호가 일치하지 않습니다.";
+        }
 
-            if (empty($errors)) {
-                $id = $_SESSION['id'];
+        if (empty($errors)) {
+            $id = $_SESSION['id'];
 
-                $conn = DB::connect();
-                $stmt = $conn->prepare("SELECT id FROM users WHERE nickname = ? AND id != ?");
-                $stmt->bind_param("si", $nickname, $id);
-                $stmt->execute();
-                if ($stmt->get_result()->num_rows > 0) {
-                    $errors[] = "이미 사용 중인 닉네임입니다.";
-                } else {
-                    User::updateNickname($id, $nickname);
-                    if ($password) User::updatePassword($id, $password);
+            $conn = DB::connect();
+            $stmt = $conn->prepare("SELECT id FROM users WHERE nickname = ? AND id != ?");
+            $stmt->bind_param("si", $nickname, $id);
+            $stmt->execute();
+            if ($stmt->get_result()->num_rows > 0) {
+                $errors[] = "이미 사용 중인 닉네임입니다.";
+            } else {
+                $result = User::updateUser($id, $nickname, $password);
+                if ($result) {
                     $_SESSION['nickname'] = $nickname;
                     unset($_SESSION['verified']);
                     echo "<script>alert('정보 수정 완료!'); location.href = 'index.php';</script>";
                     exit;
+                } else {
+                    $errors[] = "업데이트 실패.";
                 }
             }
         }
-
-        return $errors;
     }
+
+    return $errors;
+}
+
 
     // ✅ 비밀번호 확인 단계 (mypage 보호)
     public static function checkPasswordAndRedirect() {
