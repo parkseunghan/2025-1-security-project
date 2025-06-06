@@ -24,8 +24,8 @@ class PostController {
                     $errors[] = "허용되지 않는 파일 형식입니다.";
                 } else {
                     $newName = time() . '_' . preg_replace("/[^a-zA-Z0-9_.]/", "", $filename);
-                    $filePath = 'public/uploads/' . $newName;
-                    $uploadPath = '/var/www/html/' . $filePath; // 실제 저장 경로
+                    $filePath = 'uploads/' . $newName;
+                    $uploadPath = '/var/www/html/public/' . $filePath; // 실제 저장 경로
                     move_uploaded_file($tmp, $uploadPath);
                 }
             }
