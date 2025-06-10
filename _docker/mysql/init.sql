@@ -26,3 +26,17 @@ CREATE TABLE `posts` (
   FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
 );
 
+CREATE TABLE comments (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `content` TEXT NOT NULL,
+  `post_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `parent_id` INT DEFAULT NULL,
+  FOREIGN KEY (post_id) REFERENCES posts(id)
+    ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+    ON DELETE CASCADE,
+  FOREIGN KEY (parent_id) REFERENCES comments(id)
+    ON DELETE CASCADE
+);
