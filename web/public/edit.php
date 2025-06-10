@@ -3,10 +3,20 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../app/controllers/PostController.php';
 require_once __DIR__ . '/../app/models/Post.php';
 
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>alert('로그인이 필요합니다.'); location.href='login.php';</script>";
+    exit;
+}
+
 $id = $_GET['id'];
 $post = Post::getPostById($id);
 if (!$post) {
     echo "<script>alert('게시글 없음'); location.href='index.php';</script>";
+    exit;
+}
+
+if ($post['user_id'] != $_SESSION['user_id']) {
+    echo "<script>alert('본인만 수정 가능합니다.'); location.href='view.php?id=$id';</script>";
     exit;
 }
 

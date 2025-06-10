@@ -22,7 +22,7 @@ class AdminController {
         }
 
         // 자신을 삭제하는 행위 방지
-        if ($_SESSION['id'] == $id) {
+        if ($_SESSION['user_id'] == $id) {
             die("⚠️ 본인 계정은 삭제할 수 없습니다.");
         }
 

@@ -70,7 +70,7 @@ class AuthController {
                     if (session_status() === PHP_SESSION_NONE) session_start();
                     session_regenerate_id(true); // 세션 고정 방지
 
-                    $_SESSION['id'] = $user['id'];
+                    $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['nickname'] = $user['nickname'];
                     $_SESSION['is_admin'] = $user['is_admin'];
@@ -114,7 +114,7 @@ class AuthController {
 
     // ✅ 현재 사용자 조회
     public static function getCurrentUser() {
-        $id = $_SESSION['id'] ?? null;
+        $id = $_SESSION['user_id'] ?? null;
         return $id ? User::getUserById($id) : null;
     }
 
@@ -136,7 +136,7 @@ class AuthController {
         }
 
         if (empty($errors)) {
-            $id = $_SESSION['id'];
+            $id = $_SESSION['user_id'];
 
             $conn = DB::connect();
             $stmt = $conn->prepare("SELECT id FROM users WHERE nickname = ? AND id != ?");
@@ -168,7 +168,7 @@ class AuthController {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $password = $_POST['password'];
-            $id = $_SESSION['id'];
+            $id = $_SESSION['user_id'];
             $user = User::getUserById($id);
 
             if ($user && password_verify($password, $user['password'])) {

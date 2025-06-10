@@ -3,7 +3,7 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../app/controllers/AuthController.php';
 
 // 로그인 확인
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['user_id'])) {
     echo "<script>alert('로그인이 필요합니다.'); location.href='login.php';</script>";
     exit;
 }
@@ -39,7 +39,7 @@ if (!empty($errors)) {
 }
 
 // 업데이트 실행
-$id = $_SESSION['id'];
+$id = $_SESSION['user_id'];
 $result = AuthController::updateUser($id, $nickname, $password);
 
 if ($result) {

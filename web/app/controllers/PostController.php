@@ -9,7 +9,7 @@ class PostController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title = trim($_POST['title'] ?? '');
             $content = trim($_POST['content'] ?? '');
-            $userId = $_SESSION['id'] ?? null;
+            $userId = $_SESSION['user_id'] ?? null;
             $filePath = '';
     
             // ✅ 파일 업로드

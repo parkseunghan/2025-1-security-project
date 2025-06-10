@@ -12,7 +12,7 @@ $result = Post::getAllPosts($search);
 <body>
     <h1>연약한 아이</h1>
 
-    <?php if (isset($_SESSION['id'])): ?>
+    <?php if (isset($_SESSION['user_id'])): ?>
         <p><?= $_SESSION['nickname'] ?>님 환영합니다!</p>
         <a href="write.php">글쓰기</a> |
         <a href="mypage.php">마이페이지</a> |

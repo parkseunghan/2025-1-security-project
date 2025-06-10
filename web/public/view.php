@@ -28,7 +28,7 @@ $content = nl2br(htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8'));
         <p>첨부파일: <a href="download.php?file=<?= urlencode($post['file_path']) ?>">다운로드</a></p>
     <?php endif; ?>
 
-    <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $post['user_id']): ?>
+    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $post['user_id']): ?>
         <a href="edit.php?id=<?= $post['id'] ?>">수정</a>
         <a href="delete.php?id=<?= $post['id'] ?>">삭제</a>
     <?php endif; ?>

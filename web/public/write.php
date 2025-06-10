@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../app/controllers/PostController.php';
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['user_id'])) {
     echo "<script>alert('로그인 해주세요!'); location.href='login.php';</script>";
     exit;
 }
